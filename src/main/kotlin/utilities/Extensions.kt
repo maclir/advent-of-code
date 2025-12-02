@@ -44,10 +44,14 @@ fun String.intLines(delimiters: String = " ") =
     if (delimiters != "") this.lines().map { it.split(delimiters).map { digits -> digits.toInt() } }
     else this.lines().map { it.split(delimiters).drop(1).dropLast(1).map { digits -> digits.toInt() } }
 
+fun String.singleIntLines() = this.lines().map { it.toInt() }
+
 fun String.longLines(delimiters: String = " ") =
     this.lines().map { it.split(delimiters).map { digits -> digits.toLong() } }
 
 fun String.charGrid() = lines().map { it.toCharArray().toList() }
+
+fun String.mutableCharGrid() = lines().map { it.toCharArray().toMutableList() }
 
 fun List<List<Any>>.print() = forEach { row ->
     row.forEach { print(it) }
@@ -86,6 +90,7 @@ fun <T> List<List<T>>.transpose(): List<List<T>> {
     return transposed
 }
 
-fun <E> List<E>.permutations(builtSequence: List<E> = listOf()): List<List<E>> =
-    if (isEmpty()) listOf(builtSequence)
-    else flatMap { (this - it).permutations(builtSequence + it) }
+fun <E> List<E>.permutations(builtSequence: List<E> = listOf()): List<List<E>> = if (isEmpty()) listOf(builtSequence)
+else flatMap { (this - it).permutations(builtSequence + it) }
+
+fun String.indicesOf(s: String): List<Int> = s.toRegex().findAll(this).map { it.range.first }.toList()
