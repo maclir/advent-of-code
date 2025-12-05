@@ -49,6 +49,8 @@ fun String.singleIntLines() = this.lines().map { it.toInt() }
 fun String.longLines(delimiters: String = " ") =
     this.lines().map { it.split(delimiters).map { digits -> digits.toLong() } }
 
+fun String.singleLongLines() = this.lines().map { it.toLong() }
+
 fun String.charGrid() = lines().map { it.toCharArray().toList() }
 
 fun String.mutableCharGrid() = lines().map { it.toCharArray().toMutableList() }
