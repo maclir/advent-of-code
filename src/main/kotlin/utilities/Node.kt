@@ -80,6 +80,12 @@ fun <T> List<MutableList<T>>.setNode(node: Node, t: T): List<MutableList<T>> {
     return this
 }
 
+fun <T> List<MutableList<T>>.setNodeSafe(node: Node, t: T) = apply {
+    getOrNull(node.row)?.let { row ->
+        if (node.col in row.indices) row[node.col] = t
+    }
+}
+
 fun <E> List<List<E>>.forEachNode(action: (node: Node, E) -> Unit) {
     this.forEachIndexed { rIndex, r ->
         r.forEachIndexed { cIndex, c ->
