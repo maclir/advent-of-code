@@ -4,6 +4,7 @@ import java.math.BigInteger
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 
 fun Pair<Int, Int>.manhattanDistance(to: Pair<Int, Int>) = abs(first - to.first) + abs(second - to.second)
 
@@ -96,3 +97,12 @@ fun <E> List<E>.permutations(builtSequence: List<E> = listOf()): List<List<E>> =
 else flatMap { (this - it).permutations(builtSequence + it) }
 
 fun String.indicesOf(s: String): List<Int> = s.toRegex().findAll(this).map { it.range.first }.toList()
+
+fun Triple<Double, Double, Double>.calculateDistance(p2: Triple<Double, Double, Double>): Double {
+    val (x1, y1, z1) = this
+    val (x2, y2, z2) = p2
+    val dx = x2 - x1
+    val dy = y2 - y1
+    val dz = z2 - z1
+    return sqrt(dx * dx + dy * dy + dz * dz)
+}
