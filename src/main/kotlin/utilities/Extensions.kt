@@ -45,6 +45,17 @@ fun String.intLines(delimiters: String = " ") =
     if (delimiters != "") this.lines().map { it.split(delimiters).map { digits -> digits.toInt() } }
     else this.lines().map { it.split(delimiters).drop(1).dropLast(1).map { digits -> digits.toInt() } }
 
+fun String.nodeLines(delimiters: String = " "): List<Node> {
+    return if (delimiters != "") this.lines().map {
+        val (first, second) = it.split(delimiters).map { digits -> digits.toInt() }
+        Node(first, second)
+    }
+    else this.lines().map {
+        val (first, second) = it.split(delimiters).drop(1).dropLast(1).map { digits -> digits.toInt() }
+        Node(first, second)
+    }
+}
+
 fun String.singleIntLines() = this.lines().map { it.toInt() }
 
 fun String.longLines(delimiters: String = " ") =

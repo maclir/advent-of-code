@@ -86,6 +86,25 @@ fun <T> List<MutableList<T>>.setNodeSafe(node: Node, t: T) = apply {
     }
 }
 
+fun <T> List<MutableList<T>>.floodFill(start: Node, empty: T, fill: T) {
+    if (!start.isInMap(this) || atNode(start) != empty) return
+
+    setNode(start, fill)
+
+    val queue = ArrayDeque<Node>()
+    queue.add(start)
+
+    while (!queue.isEmpty()) {
+        val current = queue.removeFirst()
+        for (neighbor in current.adjacent()) {
+            if (neighbor.isInMap(this) && atNode(neighbor) == empty) {
+                setNode(neighbor, fill)
+                queue.add(neighbor)
+            }
+        }
+    }
+}
+
 fun <E> List<List<E>>.forEachNode(action: (node: Node, E) -> Unit) {
     this.forEachIndexed { rIndex, r ->
         r.forEachIndexed { cIndex, c ->
